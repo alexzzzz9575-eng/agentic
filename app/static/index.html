@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Car Price Estimator</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="hero">
+        <p class="eyebrow">Market comps · RAG agent</p>
+        <h1>Car price estimator</h1>
+        <p class="lede">
+          Choose a brand and condition, then describe the car. The agent searches
+          comparable listings and returns a price range.
+        </p>
+      </header>
+
+      <form id="estimate-form" class="panel">
+        <div class="select-row">
+          <label class="field">
+            <span>Brand</span>
+            <select id="brand" name="brand" required>
+              <option value="">Loading brands…</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Condition</span>
+            <select id="condition" name="condition" required>
+              <option value="used">Used</option>
+              <option value="new">New</option>
+            </select>
+          </label>
+        </div>
+
+        <label class="field prompt-field">
+          <span>Prompt</span>
+          <div class="prompt-box">
+            <textarea
+              id="prompt"
+              name="prompt"
+              required
+              rows="4"
+              placeholder="e.g. 2020 330i, 42,000 miles, 255 hp, 295 lb-ft torque, Premium package"
+            ></textarea>
+            <button type="submit" id="submit-btn">Estimate</button>
+          </div>
+        </label>
+      </form>
+
+      <p id="status" class="status" hidden></p>
+
+      <section id="result" class="result" hidden>
+        <article class="estimate-card">
+          <p class="estimate-label">Estimated market value</p>
+          <p id="mid-price" class="mid-price"></p>
+          <p id="range-price" class="range-price"></p>
+          <p id="confidence" class="confidence"></p>
+          <p id="rationale" class="rationale"></p>
+        </article>
+
+        <div class="comps">
+          <h2>Retrieved comparables</h2>
+          <ul id="comps-list"></ul>
+        </div>
+      </section>
+    </div>
+    <script src="/static/app.js"></script>
+  </body>
+</html>
